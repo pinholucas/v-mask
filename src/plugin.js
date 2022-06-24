@@ -1,5 +1,4 @@
-import { createDirective } from './directive';
-import { createFilter } from './filter';
+import { createDirective } from "./directive";
 
 /**
  * Vue plugin definition
@@ -8,6 +7,5 @@ import { createFilter } from './filter';
  * @param {MaskReplaces} options.placeholders
  */
 export default (Vue, options = {}) => {
-  Vue.directive('mask', createDirective(options));
-  Vue.filter('VMask', createFilter(options));
+  Vue.directive("mask", createDirective(options));
 };
