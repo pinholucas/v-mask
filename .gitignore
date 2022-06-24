@@ -123,4 +123,4 @@ Temporary Items
 /e2e/reports/
 
 ### Dist folder
-/dist/
+#/dist/
