@@ -1,12 +1,16 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import conformToMask from 'text-mask-core/src/conformToMask';
-import parseMask from './utils/parseMask';
+import conformToMask from "text-mask-core/src/conformToMask";
+import parseMask from "./utils/parseMask";
 import {
-  trigger, queryInputElementInside, isFunction, isString, isRegexp,
-} from './utils';
-import createOptions from './createOptions';
-import extendMaskReplacers from './utils/extendMaskReplacers';
+  trigger,
+  queryInputElementInside,
+  isFunction,
+  isString,
+  isRegexp,
+} from "./utils";
+import createOptions from "./createOptions";
+import extendMaskReplacers from "./utils/extendMaskReplacers";
 
 const options = createOptions();
 
@@ -25,7 +29,7 @@ const options = createOptions();
  * @param {HTMLInputElement} el
  */
 function triggerInputUpdate(el) {
-  trigger(el, 'input');
+  trigger(el, "input");
 }
 
 /**
@@ -68,7 +72,9 @@ function updateMask(el, inputMask, maskReplacers) {
  */
 function maskToString(mask) {
   const maskArray = Array.isArray(mask) ? mask : [mask];
-  const filteredMaskArray = maskArray.filter((part) => isString(part) || isRegexp(part));
+  const filteredMaskArray = maskArray.filter(
+    (part) => isString(part) || isRegexp(part)
+  );
   return filteredMaskArray.toString();
 }
 
@@ -80,14 +86,13 @@ function maskToString(mask) {
  */
 export function createDirective(directiveOptions = {}) {
   const instanceMaskReplacers = extendMaskReplacers(
-    directiveOptions && directiveOptions.placeholders,
+    directiveOptions && directiveOptions.placeholders
   );
 
   /**
    * Vue directive definition
    */
   return {
-
     /**
      * Called only once, when the directive is first bound to the element.
      * This is where you can do one-time setup work.
@@ -95,7 +100,7 @@ export function createDirective(directiveOptions = {}) {
      * @param {(HTMLInputElement|HTMLElement)} el
      * @param {?string}                        value
      */
-    bind(el, { value }) {
+    beforeMount(el, { value }) {
       el = queryInputElementInside(el);
 
       updateMask(el, value, instanceMaskReplacers);
@@ -113,11 +118,11 @@ export function createDirective(directiveOptions = {}) {
      * @param {?string}                        value
      * @param {?string}                        oldValue
      */
-    componentUpdated(el, { value, oldValue }) {
+    updated(el, { value, oldValue }) {
       el = queryInputElementInside(el);
 
-      const isMaskChanged = isFunction(value)
-        || maskToString(oldValue) !== maskToString(value);
+      const isMaskChanged =
+        isFunction(value) || maskToString(oldValue) !== maskToString(value);
 
       if (isMaskChanged) {
         updateMask(el, value, instanceMaskReplacers);
@@ -126,7 +131,7 @@ export function createDirective(directiveOptions = {}) {
       updateValue(el, isMaskChanged);
     },
 
-    unbind(el) {
+    unmounted(el) {
       el = queryInputElementInside(el);
       options.remove(el);
     },
