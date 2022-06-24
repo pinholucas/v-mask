@@ -1,13 +1,12 @@
 # :abcd: Vue input mask
 
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/v-mask)
-[![npm](https://img.shields.io/npm/dm/v-mask.svg)](https://www.npmjs.com/package/v-mask)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/probil/v-mask/master/LICENSE)
 [![Vue3](https://img.shields.io/badge/Vue-3.x-brightgreen.svg)](https://vuejs.org/)
 
-> Tiny input mask library for Vue 3. No dependencies
+> Tiny input mask library for Vue 3. No dependencies.
 
-## :gear: Features removed
+## :warning: Features removed
 
 Since Vue 3 doesn't supports filter anymore (you should use the computed approach), the filter feature has been removed.
 
